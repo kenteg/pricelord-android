@@ -1,4 +1,4 @@
-package com.example.todolist
+package com.example.todolist.adapter
 
 import android.graphics.Paint.STRIKE_THRU_TEXT_FLAG
 import android.view.LayoutInflater
@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todolist.R
+import com.example.todolist.model.Todo
 import kotlinx.android.synthetic.main.item_todo.view.*
 
 class TodoAdapter(
+    //хранилище данных
     private val todos: MutableList<Todo>
 ) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
 
@@ -17,6 +20,7 @@ class TodoAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(
             LayoutInflater.from(parent.context).inflate(
+                //привязка layout
                 R.layout.item_todo,
                 parent,
                 false
@@ -44,6 +48,7 @@ class TodoAdapter(
         }
     }
 
+    //обновление view в момент биндинга на главную форму
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         val curTodo = todos[position]
         holder.itemView.apply {
