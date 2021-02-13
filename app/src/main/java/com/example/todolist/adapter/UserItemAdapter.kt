@@ -10,6 +10,7 @@ import com.example.todolist.R
 import com.example.todolist.model.Todo
 import com.example.todolist.model.UserItem
 import kotlinx.android.synthetic.main.item_todo.view.*
+import kotlinx.android.synthetic.main.user_item.view.*
 
 //адаптер для обращения с компонентами листа
 class UserItemAdapter(
@@ -23,7 +24,7 @@ class UserItemAdapter(
         return UserItemViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 //привязка layout
-                R.layout.userItem,
+                R.layout.user_item,
                 parent,
                 false
             )
@@ -31,14 +32,14 @@ class UserItemAdapter(
     }
 
     fun addTodo(todo: Todo) {
-        userItems.add(todo)
+        //userItems.add(todo)
         notifyItemInserted(userItems.size - 1)
     }
 
     fun deleteDoneTodos() {
-        userItems.removeAll { todo ->
-            todo.isChecked
-        }
+//        userItems.removeAll { todo ->
+//            todo.isChecked
+//        }
         notifyDataSetChanged()
     }
 
@@ -52,15 +53,18 @@ class UserItemAdapter(
 
     //обновление view в момент биндинга на главную форму
     override fun onBindViewHolder(holder: UserItemViewHolder, position: Int) {
-        val curTodo = userItems[position]
+        val userItem = userItems[position]
         holder.itemView.apply {
-            tvTodoTitle.text = curTodo.title
-            cbDone.isChecked = curTodo.isChecked
-            toggleStrikeThrough(tvTodoTitle, curTodo.isChecked)
-            cbDone.setOnCheckedChangeListener { _, isChecked ->
-                toggleStrikeThrough(tvTodoTitle, isChecked)
-                curTodo.isChecked = !curTodo.isChecked
-            }
+            name.text = userItem.name
+            link.text = userItem.link
+            price.text = userItem.price?.toPlainString()
+//            tvTodoTitle.text = curTodo.title
+//            cbDone.isChecked = curTodo.isChecked
+//            toggleStrikeThrough(tvTodoTitle, curTodo.isChecked)
+//            cbDone.setOnCheckedChangeListener { _, isChecked ->
+//                toggleStrikeThrough(tvTodoTitle, isChecked)
+//                curTodo.isChecked = !curTodo.isChecked
+//            }
         }
     }
 
